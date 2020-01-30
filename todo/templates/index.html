@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8"> 
+	<title>Todo App</title> 
+	<style>
+	body{ 
+	background-image: url('https://ak5.picdn.net/shutterstock/videos/9629495/thumb/9.jpg');
+	background-repeat: no-repeat;
+	 background-size: cover;
+	color:black;
+	padding: 10px; 
+	border: 10px solid black;
+	margin: 20px;
+	margin-top: 63px; 
+} 
+.button{ 
+	color:brown; 
+} 
+.mark{font-size: 10px;
+}
+.align{
+	text-align: left;
+}
+a {
+	position: absolute;
+	right: 700px;
+  color: #1a1aff;
+  text-decoration: none;
+}
+a:visited {
+  color: #636;
+}
+a:hover, a:active, a:focus {
+  color:#c33;
+}
+h2{
+	font-style: normal;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: red;
+}
+ul
+{
+	text-align: left;
+}
+</style>
+
+</head> 
+<body> 
+	<h1><center>Todo List Application</center></h1> 
+	<div class='align'><table>
+		<tr>Add an item: 
+		</tr><tr>
+		<form action="{{ url_for('add') }}" method="POST"> 
+			<input type="text" name="todoitem"> 
+			<input type="submit" value="Add Item" class="button"> 
+		</form> 
+	</tr>
+</table>
+	</div> 
+	<div class='align'> 
+		<h2><u>Bending Tasks:</u></h2> 
+		<ul> 
+			{% for todo in incomplete %} 
+			<li style="font-size: 30pt" class='mark'>{{ todo.text }} 
+			<a href="{{ url_for('complete', id=todo.id) }}">Completed</a></li> 
+			{% endfor %}	 
+		</ul> 
+		<h2><u>Tasks Completed:</u></h2> 
+		<ul> 
+			{% for todo in complete %} 
+			<li style="font-size: 30pt">{{ todo.text }} <a href="{{ url_for('delete', id=todo.id) }}">Remove</a></li> 
+			{% endfor %} 
+		</ul> 
+	
+	</div> 
+</body> 
+</html>
